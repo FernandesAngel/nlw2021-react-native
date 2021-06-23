@@ -1,5 +1,5 @@
 import React from 'react';
-import { ScrollView} from 'react-native';
+import { ScrollView, View} from 'react-native';
 import { styles } from './styles';
 import {categories} from '../../utils/categories';
 import { Category } from '../Category';
@@ -7,10 +7,16 @@ import { Category } from '../Category';
 type Props = {
     categorySelected: string;
     setCategory: (categoryId: string) => void;
+    hasCheckBox?: boolean;
 }
 
-export function CategorySelect({ categorySelected, setCategory }: Props){
+export function CategorySelect({
+    categorySelected,
+    setCategory,
+    hasCheckBox= false,
+}: Props){
     return (
+        <View>
         <ScrollView
             style={styles.container}
             horizontal
@@ -25,9 +31,11 @@ export function CategorySelect({ categorySelected, setCategory }: Props){
                         icon={category.icon}
                         checked={category.id === categorySelected}
                         onPress={() => setCategory(category.id)}
+                        hasCheckBox={hasCheckBox}
                     />
                 ))
             }
         </ScrollView>
+        </View>
     );
 };

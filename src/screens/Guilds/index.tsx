@@ -26,7 +26,19 @@ export function Guilds( { handleGuildSelected }: Props){
             name: 'Galera do Game',
             icon: 'image.png',
             owner: true
-        }
+        },
+        {
+            id: '3',
+            name: 'Galera do Game',
+            icon: 'image.png',
+            owner: true
+        },
+        {
+            id: '4',
+            name: 'Galera do Game',
+            icon: 'image.png',
+            owner: true
+        },
     ]
     return(
         <View style={styles.container}>
@@ -39,9 +51,11 @@ export function Guilds( { handleGuildSelected }: Props){
                         onPress={() => handleGuildSelected(item)}
                      />
                 )}
-                ItemSeparatorComponent={() => <ListDivider />}
+                ItemSeparatorComponent={() => <ListDivider isCentered />}
+                ListHeaderComponent={() => <ListDivider isCentered />}
                 showsVerticalScrollIndicator={false}
                 style={styles.guilds}
+                contentContainerStyle={{ paddingBottom: 68, paddingTop: 60 }}
             />
         </View>
     )

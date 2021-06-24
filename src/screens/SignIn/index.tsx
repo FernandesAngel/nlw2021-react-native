@@ -1,24 +1,32 @@
-import React, {useState} from 'react';
-import { useNavigation } from '@react-navigation/native';
+import React from 'react';
 import {
     ScrollView,
     View,
     Text,
     Image,
-
+    Alert,
+    ActivityIndicator
 } from 'react-native';
 import {ButtonIcon} from '../../components/ButtonIcon'
 import IllustrationImg from '../../assets/illustration.png';
 import { styles } from './styles';
 import {Background} from '../../components/Background';
+import { useAuth } from '../../hooks/auth';
+import { theme } from '../../global/styles/theme';
 
 
 
 export function SignIn(){
-  const navigation = useNavigation();
 
-  function handleSignIn(){
-      navigation.navigate("Home")
+  const {loading, signIn} = useAuth();
+
+  async function handleSignIn(){
+      try {
+        await signIn()
+      } catch (error) {
+        console.log(error);
+        Alert.alert(error);
+      }
   }
 
   return(
@@ -43,10 +51,13 @@ export function SignIn(){
                         favoritos com seus amigos
                     </Text>
 
-                    <ButtonIcon
-                    title="Entrar com Discord"
-                    onPress={handleSignIn}
-                    />
+                    {
+                      loading ? <ActivityIndicator color={theme.colors.primary} /> :
+                      <ButtonIcon
+                        title="Entrar com Discord"
+                        onPress={handleSignIn}
+                      />
+                    }
                 </View>
             </ScrollView>
         </View>
